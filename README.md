@@ -1,35 +1,32 @@
-MI0283QT2-pi
+MI0283QT2-pi-fb
+===============
+
+Raspberry Pi userspace framebuffer driver for MI0283QT display
+
+Based on dgallot's MI0283QT2-pi library. 
+See instructions how the display can be connected from dgallot here: http://www.gallot.be/?p=197
+
+This is a userspace framebuffer driver based on dgallot's library. It runs X well, a little slow but quite usable.
+The driver is made as a normal userspace process, that scans the original ARM framebuffer for changes and transmits them to the SPI attached display. It takes about 10-15% CPU idling though if no pixels changed.
+
+It compiles with same settings as the original demo sources. The program must be run with sudo.
+
+X must be run at 320×240 resolution to make it work. This can be done by putting the 10-monitors.conf into /usr/share/X11/xorg.conf.d . 
+
+Installation
 ============
+-Build and install wiringPi from https://github.com/WiringPi/WiringPi . That will provide the 'gpio' command used to switch the background lighting.
+-Build this driver: ./make.sh
+-Install X settings: sudo cp 10-monitors.conf /usr/share/X11/xorg.conf.d
+-Start the driver and X: ./start.sh
+-The display should light up and should display the X desktop after some seconds
 
-Adapter Board with 2.8" TFT-Display and Touch-Panel for Raspberry pi.
+To stop the driver, run ./stop.sh.
 
-<http://www.watterott.com/en/MI0283QT-2-Adapter>
+Issues
+======
+If it don't work, try to get dgallot's original repository demos running first. See instructions here: http://www.gallot.be/?p=197
 
-![MI0283QT-Adapter](http://www.gallot.be/wp-content/uploads/2012/07/2012-07-05-19.48.23.jpg)
+Switiching the virtual terminals with Ctrl+Alt+F1..F7 leads to display corruption and crashes, as the consoles run in incompatible resolutions if not configured to match the display resolution of 320x240.
 
-## Original library
-[watterott / MI0283QT-Adapter](https://github.com/watterott/MI0283QT-Adapter/blob/master/README.md)
-
-## Features 
- * Multi-Inno MI0283QT 2.8" TFT-Display with Touch-Panel (240x320, 262K colors)
- * TI ADS7846 Touch-Controller ( Software not yet implemented for raspberry pi )
- * Interface: SPI (Display + Touch-Controller)
- * Backlight dimmable (PWM) ( Software not yet implemented for raspberry pi )
- * 3V3 - 5V tolerant IOs
-
-## Hardware
-[Connecting Adapter to Raspberry pi](http://www.gallot.be/wp-content/uploads/2012/07/MI0283QT-2-to-raspberry-pi.png)
-
-## License
-No idea of the original source. My changes are public domain !
-
-## Software for Raspberry pi
- * [Kernel](http://www.bootc.net/projects/raspberry-pi-kernel/)
- * [Library + Examples](https://github.com/dgallot/MI0283QT2-pi)
-
-## Demo
- 
- * [demo1](http://youtu.be/kO5lM3OpqAw)
- * [gameoflife](http://youtu.be/aiTfmdaDBYk)
-
- 
+For the same reason, the driver should not be run before the X server is up, so there is a sleep in start.sh. If your X takes longer to start, that need to be adjusted. Maybe the fb driver could be run from the X session instead, but that would not be needed any longer if the crash gets fixed. The driver could than be run at any time. 
