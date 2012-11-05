@@ -30,3 +30,5 @@ If it don't work, try to get dgallot's original repository demos running first. 
 Switiching the virtual terminals with Ctrl+Alt+F1..F7 leads to display corruption and crashes, as the consoles run in incompatible resolutions if not configured to match the display resolution of 320x240.
 
 For the same reason, the driver should not be run before the X server is up, so there is a sleep in start.sh. If your X takes longer to start, that need to be adjusted. Maybe the fb driver could be run from the X session instead, but that would not be needed any longer if the crash gets fixed. The driver could than be run at any time. 
+
+![framebuffer display](http://42loop.de:8888/garage/uploads/233/raspberrypi_lcd.JPG)
