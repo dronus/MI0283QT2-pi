@@ -15,11 +15,15 @@ X must be run at 320×240 resolution to make it work. This can be done by puttin
 
 Installation
 ============
--Build and install wiringPi from https://github.com/WiringPi/WiringPi . That will provide the 'gpio' command used to switch the background lighting.
--Build this driver: ./make.sh
--Install X settings: sudo cp 10-monitors.conf /usr/share/X11/xorg.conf.d
--Start the driver and X: ./start.sh
--The display should light up and should display the X desktop after some seconds
+Build and install wiringPi from https://github.com/WiringPi/WiringPi . That will provide the 'gpio' command used to switch the background lighting.
+
+Build this driver: ./make.sh
+
+Install X settings: sudo cp 10-monitors.conf /usr/share/X11/xorg.conf.d
+
+Start the driver and X: ./start.sh
+
+The display should light up and should display the X desktop after some seconds
 
 To stop the driver, run ./stop.sh.
 
