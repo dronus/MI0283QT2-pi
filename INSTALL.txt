@@ -1,0 +1,24 @@
+
+INSTALL
+
+
+X must be run at 320x200 pixels, matching the LCD display resolution.
+As the framebuffer contents is send as-is, the resolution and display 
+depth must match exactly, otherwise the display would be garbled.
+Run the following command to set up a matching X configuration:
+
+sudo cp 10-monitors.conf /usr/share/X11/xorg.conf.d
+
+
+Start X:
+
+startx &
+
+Start this driver:
+
+./fb &
+
+
+
+You should see the X desktop appear on the display.
+
